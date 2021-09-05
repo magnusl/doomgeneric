@@ -16,8 +16,7 @@
 //	Handles WAD file header, directory, lump I/O.
 //
 
-
-
+extern void I_EndRead ();
 
 #include <ctype.h>
 #include <stdio.h>

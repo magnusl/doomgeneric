@@ -27,7 +27,7 @@
 #define WIN32_LEAN_AND_MEAN
 #include <windows.h>
 #else
-#include <unistd.h>
+//#include <unistd.h>
 #endif
 
 #ifdef ORIGCODE
@@ -271,7 +271,8 @@ void I_Quit (void)
 
 static int ZenityAvailable(void)
 {
-    return system(ZENITY_BINARY " --help >/dev/null 2>&1") == 0;
+    return 1;
+    //return system(ZENITY_BINARY " --help >/dev/null 2>&1") == 0;
 }
 
 // Escape special characters in the given string so that they can be
@@ -320,6 +321,7 @@ static char *EscapeShellString(char *string)
 
 // Open a native error box with a message using zenity
 
+#if 0
 static int ZenityErrorBox(char *message)
 {
     int result;
@@ -346,6 +348,7 @@ static int ZenityErrorBox(char *message)
 
     return result;
 }
+#endif
 
 #endif /* !defined(_WIN32) && !defined(__MACOSX__) */
 
@@ -365,7 +368,7 @@ void I_Error (char *error, ...)
 
     if (already_quitting)
     {
-        fprintf(stderr, "Warning: recursive call to I_Error detected.\n");
+        //fprintf(stderr, "Warning: recursive call to I_Error detected.\n");
 #if ORIGCODE
         exit(-1);
 #endif
@@ -378,8 +381,8 @@ void I_Error (char *error, ...)
     // Message first.
     va_start(argptr, error);
     //fprintf(stderr, "\nError: ");
-    vfprintf(stderr, error, argptr);
-    fprintf(stderr, "\n\n");
+    //vfprintf(stderr, error, argptr);
+    //fprintf(stderr, "\n\n");
     va_end(argptr);
     fflush(stderr);
 
@@ -450,7 +453,7 @@ void I_Error (char *error, ...)
     }
 #else
     {
-        ZenityErrorBox(msgbuf);
+        //ZenityErrorBox(msgbuf);
     }
 #endif
 

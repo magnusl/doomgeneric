@@ -22,7 +22,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
-#include <errno.h>
+//#include <errno.h>
 
 #ifdef _WIN32
 #define WIN32_LEAN_AND_MEAN
@@ -32,8 +32,7 @@
 #include <direct.h>
 #endif
 #else
-#include <sys/stat.h>
-#include <sys/types.h>
+#include <os/file_api.h>
 #endif
 
 #include "doomtype.h"
@@ -79,7 +78,7 @@ boolean M_FileExists(char *filename)
         // If we can't open because the file is a directory, the 
         // "file" exists at least!
 
-        return errno == EISDIR;
+        return true; //errno == EISDIR;
     }
 }
 
