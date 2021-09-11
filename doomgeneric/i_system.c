@@ -453,6 +453,8 @@ void I_Error (char *error, ...)
     }
 #else
     {
+        printf(msgbuf);
+        exit(-1);
         //ZenityErrorBox(msgbuf);
     }
 #endif

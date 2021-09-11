@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdbool.h>
 
+#include <os/log_api.h>
+
 #define KEYQUEUE_SIZE 16
 
 static unsigned short s_KeyQueue[KEYQUEUE_SIZE];
@@ -27,6 +29,7 @@ void DG_Init(){
 }
 
 void DG_DrawFrame() {
+  log_notice("Draw frame!");
 }
 
 void DG_SleepMs(uint32_t ms) {
