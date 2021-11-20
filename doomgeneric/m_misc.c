@@ -32,7 +32,7 @@
 #include <direct.h>
 #endif
 #else
-#include <pf/io.h>
+#include <sys/base.h>
 #endif
 
 #include "doomtype.h"
@@ -490,9 +490,7 @@ int M_vsnprintf(char *buf, size_t buf_len, const char *s, va_list args)
     // Windows (and other OSes?) has a vsnprintf() that doesn't always
     // append a trailing \0. So we must do it, and write into a buffer
     // that is one byte shorter; otherwise this function is unsafe.
-    printf("call vsnprintf");
     result = vsnprintf(buf, buf_len, s, args);
-    printf("after vsnprintf");
 
     // If truncated, change the final char in the buffer to a \0.
     // A negative result indicates a truncated buffer on Windows.

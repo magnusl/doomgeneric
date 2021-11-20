@@ -62,6 +62,9 @@
 
 #include <inttypes.h>
 
+#undef true
+#undef false
+
 #if defined(__cplusplus)
 
 // Use builtin bool type with C++.

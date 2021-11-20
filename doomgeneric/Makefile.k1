@@ -14,8 +14,8 @@ endif
 
 CC=gcc
 CFLAGS = -static -ffreestanding -nostdlib -nostdinc -fno-builtin -fno-stack-protector -fno-pic -nostartfiles -nodefaultlibs -Wall -Wextra -Werror -Wno-unused -mcmodel=large -fno-asynchronous-unwind-tables -c $(INCLUDE_DIRS) -Wno-missing-field-initializers -Wno-sign-compare -Wno-implicit-fallthrough -Wno-enum-conversion -Wno-pointer-to-int-cast -Wno-type-limits
-LDFLAGS = -T ${LINKER_SCRIPT} -nostdlib -L${BUILD_DIR}/libs -l:libc.a -l:libpf.a
-INCLUDE_DIRS = ${LIBC_INCLUDES} ${LIBPF_INCLUDES}
+LDFLAGS = -T ${LINKER_SCRIPT} -nostdlib -L${BUILD_DIR}/libs -l:libc.a -l:libddk.a
+INCLUDE_DIRS = ${LIBC_INCLUDES} -I${DDK_INCLUDES}
 
 # subdirectory for objects
 OBJDIR=build
@@ -35,8 +35,8 @@ clean:
 $(OUTPUT):	$(OBJS)
 	@echo [Linking $@]
 	ld $(OBJS) $(LDFLAGS) -o ${OUTPUT}
-	mkdir -p ${ROOTFS_DIR}/bin/
-	cp ${OUTPUT} ${ROOTFS_DIR}/bin/
+	mkdir -p ${ROOTFS_DIR}/home/user
+	cp ${OUTPUT} ${ROOTFS_DIR}/home/user
 
 $(OBJS): | $(OBJDIR)
 
